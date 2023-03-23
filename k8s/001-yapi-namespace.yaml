@@ -4,3 +4,78 @@ metadata:
   labels:
     product: yapi
   name: central
+
+---
+apiVersion: v1
+data:
+  YAPI_PORT: "3001"
+  YAPI_ACOUNT: admin@admin
+  YAPI_DB_SERVER: 10.30.140.48
+  YAPI_DB_NAME: yapi
+  YAPI_DB_PORT: "27017"
+  YAPI_DB_USER: yapipro
+  YAPI_DB_PASS: "yapipro1024"
+  YAPI_DB_AUTH: yapipro
+kind: ConfigMap
+metadata:
+  name: yapi-config
+  namespace: central
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: yapi
+  name: yapi
+  namespace: central
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yapi
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: yapi
+    spec:
+      containers:
+        - envFrom:
+            - configMapRef:
+                name: yapi-config
+          image: yapi-test:v1.0
+          imagePullPolicy: Always
+          name: yapi
+          ports:
+            - containerPort: 3001
+              name: http
+              protocol: TCP
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: yapi
+  name: yapi
+  namespace: central
+spec:
+  ports:
+    - name: http
+      port: 3001
+      protocol: TCP
+      targetPort: 3001
+      nodePort: 32700
+  selector:
+    app: yapi
+  type: NodePort
+
+---
