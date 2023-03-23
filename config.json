@@ -1,0 +1,12 @@
+{
+    "port": "YAPI_PORT",
+    "adminAccount": "YAPI_ACOUNT",
+    "db":{
+        "servername": "YAPI_DB_SERVER",
+        "DATABASE": "YAPI_DB_NAME",
+        "port": "YAPI_DB_PORT",
+        "user": "YAPI_DB_USER",
+        "pass": "YAPI_DB_PASS",
+        "authSource": "YAPI_DB_AUTH"
+    }
+}
