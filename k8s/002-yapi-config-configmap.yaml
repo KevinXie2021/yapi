@@ -1,13 +1,13 @@
 apiVersion: v1
 data:
   YAPI_PORT: "3001"
-  YAPI_ACOUNT: admin@admin.com
-  YAPI_DB_SERVER: 10.101.1.17
+  YAPI_ACOUNT: admin@admin
+  YAPI_DB_SERVER: 10.30.140.48
   YAPI_DB_NAME: yapi
-  YAPI_DB_PORT: "56789"
-  YAPI_DB_USER: yapi
-  YAPI_DB_PASS: "123456"
-  YAPI_DB_AUTH: yapi
+  YAPI_DB_PORT: "27017"
+  YAPI_DB_USER: yapipro
+  YAPI_DB_PASS: "yapipro1024"
+  YAPI_DB_AUTH: yapipro
 kind: ConfigMap
 metadata:
   name: yapi-config
